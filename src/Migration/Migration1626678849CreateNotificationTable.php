@@ -15,7 +15,7 @@ class Migration1626678849CreateNotificationTable extends MigrationStep
     public function update(Connection $connection): void
     {
         $sql =<<<SQL
-CREATE TABLE IF NOT EXISTS `stag2_notification` (
+CREATE TABLE IF NOT EXISTS `dc_notification` (
     `id` BINARY(16) NOT NULL,
     `version_id` BINARY(16) NOT NULL,
     `auto_increment` BIGINT unsigned NOT NULL AUTO_INCREMENT,

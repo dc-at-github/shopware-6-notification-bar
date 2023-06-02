@@ -9,11 +9,11 @@
         </service>
 
         <service id="Dc\GlobalNotification\Core\Content\Translation\NotificationTranslationDefinition">
-            <tag name="shopware.entity.definition" entity="stag2_notification_translation" />
+            <tag name="shopware.entity.definition" entity="dc_notification_translation" />
         </service>
 
         <service id="Dc\GlobalNotification\Core\Content\Aggregate\PageNotification\PageNotificationDefinition">
-            <tag name="shopware.entity.definition" entity="stag2_page_notification" />
+            <tag name="shopware.entity.definition" entity="dc_page_notification" />
         </service>
 
         <service id="Dc\GlobalNotification\Extension\Content\Category\CategoryExtension">

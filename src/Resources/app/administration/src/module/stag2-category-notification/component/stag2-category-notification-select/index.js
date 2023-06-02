@@ -25,7 +25,7 @@ Component.register("stag2-category-notification-select", {
         ]),
 
         stag2PageNotificationRepository(){
-            return this.repositoryFactory.create('stag2_page_notification');
+            return this.repositoryFactory.create('dc_page_notification');
         },
 
         stag2NotificationRepository(){

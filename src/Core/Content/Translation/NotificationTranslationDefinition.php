@@ -11,7 +11,7 @@ use Dc\GlobalNotification\Core\Content\NotificationDefinition;
 
 class NotificationTranslationDefinition extends EntityTranslationDefinition {
 
-    public const ENTITY_NAME = "stag2_notification_translation";
+    public const ENTITY_NAME = "dc_notification_translation";
 
     public function getEntityName(): string
     {

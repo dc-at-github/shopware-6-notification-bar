@@ -17,7 +17,7 @@ use Dc\GlobalNotification\Core\Content\NotificationDefinition;
 
 class PageNotificationDefinition extends EntityDefinition{
 
-    public const ENTITY_NAME = "stag2_page_notification";
+    public const ENTITY_NAME = "dc_page_notification";
 
     public function getEntityName(): string
     {
