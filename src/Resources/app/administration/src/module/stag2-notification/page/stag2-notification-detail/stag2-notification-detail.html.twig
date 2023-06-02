@@ -1,0 +1,191 @@
+{% block stag2_notification_detail_page %}
+    <sw-page class="stag2-notification-detail-page">
+        {% block stag2_notification_detail_header %}
+            <template slot="smart-bar-header">
+                <h2 v-if="stag2Notification && stag2Notification.isNew()">{{ $tc('stag2.notification.header.new') }}</h2>
+                <h2 v-if="stag2Notification && !stag2Notification.isNew()">
+                    {{ $t('stag2.notification.header.update') }}
+                    - "{{ stag2Notification.translated.title }}"
+                </h2>
+            </template>
+        {% endblock %}
+
+        {% block stag2_notification_detail_actions %}
+            <template slot="smart-bar-actions">
+                {% block stag2_notification_detail_action_btn %}
+                    <sw-button-process
+                            variant="primary"
+                            :isLoading="isLoading"
+                            :processSuccess="processSuccess"
+                            :disabled="isLoading"
+                            @click.prevent="onSave">
+                        {{ $t('stag2.notification.button.save') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block stag2_notification_language_chooser %}
+            <template #language-switch>
+                <sw-language-switch
+                        slot="language-switch"
+                        :disabled="stag2Notification && stag2Notification.isNew()"
+                        @on-change="onChangeLanguage">
+                </sw-language-switch>
+            </template>
+        {% endblock %}
+
+        {% block stag2_notification_detail_content %}
+            <sw-card-view
+                    slot="content"
+                    :isLoading="isLoading"
+                    v-if="stag2Notification">
+                <sw-card :title="$tc('stag2.notification.generalTitle')">
+
+                    {% block stag2_notification_active_field %}
+                        <sw-switch-field v-model="stag2Notification.active"
+                                         :label="$tc('stag2.notification.field.activeNotification')">
+                        </sw-switch-field>
+                    {% endblock %}
+
+                    {% block stag2_notification_title_field %}
+                        <sw-field
+                                v-model="stag2Notification.title"
+                                :label="$tc('stag2.notification.field.title')"
+                                :placeholder="$tc('stag2.notification.placeholder.title')"
+                                validation="required">
+                        </sw-field>
+                    {% endblock %}
+
+                    {% block stag2_notification_display_title_field %}
+                        <sw-switch-field v-model="stag2Notification.displayTitle"
+                                         :label="$tc('stag2.notification.field.displayTitle')">
+                        </sw-switch-field>
+                    {% endblock %}
+
+                    {% block stag2_notification_content_field %}
+                        <sw-text-editor v-model="stag2Notification.content"
+                                        :label="$tc('stag2.notification.field.content')">
+                        </sw-text-editor>
+                    {% endblock %}
+
+                </sw-card>
+
+                <sw-card title="Notification Bar Configuration">
+
+                    <label class="help-description">
+                        <b>{{ $tc('stag2.notification.general.note') }}</b>
+                        {{ $tc('stag2.notification.general.commonFieldInfo') }}
+                    </label>
+
+                    {% block stag2_notification_display_as_field %}
+                        <template>
+                            <sw-single-select
+                                    v-model="stag2Notification.displayAs"
+                                    :options="getDisplayAsOptions"
+                                    :label="$tc('stag2.notification.field.displayAs')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block stag2_notification_animation_type_field %}
+                        <template v-if="isPopup">
+                            <sw-single-select
+                                    v-model="stag2Notification.animationType"
+                                    :options="getAnimationOptions"
+                                    :label="$tc('stag2.notification.field.animationType')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block stag2_notification_border_type_field %}
+                        <template>
+                            <sw-single-select
+                                    v-model="stag2Notification.borderType"
+                                    :options="getBorderTypeOptions"
+                                    :label="$tc('stag2.notification.field.border')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block stag2_notification_position_field %}
+                        <template v-if="!isPopup">
+                            <sw-single-select
+                                    v-model="stag2Notification.position"
+                                    :options="getPositionOptions"
+                                    :label="$tc('stag2.notification.field.barPosition')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block stag2_notification_bar_width_field %}
+                        <template v-if="!isPopup">
+                            <sw-single-select
+                                    v-model="stag2Notification.width"
+                                    :options="getBarWidthOptions"
+                                    :label="$tc('stag2.notification.field.barWidth')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block stag2_notification_cookie_field %}
+                        <sw-number-field
+                                v-model="stag2Notification.cookieLifeTime"
+                                :label="$tc('stag2.notification.field.cookieLifeTime')"
+                                :placeholder="$tc('stag2.notification.placeholder.cookieLifeTime')"
+                                validation="required">
+                        </sw-number-field>
+                    {% endblock %}
+
+                </sw-card>
+
+                <sw-card title="Colors">
+
+
+                    <label class="help-description">
+                        <b>{{ $tc('stag2.notification.general.note') }}</b>
+                        {{ $tc('stag2.notification.general.commonFieldInfo') }}
+                    </label>
+
+                    {% block stag2_notification_title_color_field %}
+                        <sw-colorpicker
+                                v-model="stag2Notification.titleColor"
+                                :label="$tc('stag2.notification.field.titleColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                    {% block stag2_notification_icon_color_field %}
+                        <sw-colorpicker
+                                v-model="stag2Notification.iconColor"
+                                :label="$tc('stag2.notification.field.iconColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                    {% block stag2_notification_overlay_color_field %}
+                        <template v-if="isPopup">
+                            <sw-colorpicker
+                                    v-model="stag2Notification.overlayColor"
+                                    :label="$tc('stag2.notification.field.overlayColor')">
+                            </sw-colorpicker>
+                        </template>
+                    {% endblock %}
+
+                    {% block stag2_notification_background_color_field %}
+                        <sw-colorpicker
+                                v-model="stag2Notification.backgroundColor"
+                                :label="$tc('stag2.notification.field.backgroundColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                    {% block stag2_notification_border_color_field %}
+                        <sw-colorpicker
+                                v-model="stag2Notification.borderColor"
+                                :label="$tc('stag2.notification.field.borderColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                </sw-card>
+            </sw-card-view>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

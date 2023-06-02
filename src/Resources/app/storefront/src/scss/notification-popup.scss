@@ -1,0 +1,106 @@
+.notification-popup-overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 99;
+
+  .close-notification{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    font-size: 19px;
+    line-height: normal;
+  }
+}
+.notification-popup-container{
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+
+  .close-notification{
+    opacity: 0;
+    animation-duration: 0.1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    animation-name: show-notification-close;
+  }
+
+  &.stag2-slide-up{
+    top: 100%;
+    animation-name: slide-from-bottom;
+  }
+  &.stag2-slide-down{
+    top: -100%;
+    animation-name: slide-from-up;
+  }
+  &.stag2-slide-left{
+     left: 100%;
+     animation-name: slide-from-right;
+  }
+  &.stag2-slide-right{
+    left: -100%;
+    animation-name: slide-from-left;
+  }
+  &.stag2-fade-in{
+    opacity: 0;
+    animation-name: animate-fade-in;
+  }
+}
+.notification-popup-content{
+  border-width: 2px;
+  text-align: center;
+  padding: 10px;
+  width: fit-content;
+  min-width: 400px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .notification-title{
+    font-size: 24px;
+  }
+
+  .notification-content{
+    margin-bottom: 0;
+  }
+}
+
+@keyframes slide-from-up {
+  from { top: -100%; }
+  to { top: 0; }
+}
+
+@keyframes slide-from-bottom {
+  from { top: 100%; }
+  to { top: 0; }
+}
+
+@keyframes slide-from-left {
+  from { left: -100%; }
+  to { left: 0; }
+}
+
+@keyframes slide-from-right {
+  from { left: 100%; }
+  to { left: 0; }
+}
+
+@keyframes animate-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes show-notification-close{
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

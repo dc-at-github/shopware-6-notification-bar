@@ -1,0 +1,51 @@
+{
+  "stag2": {
+    "notification": {
+      "general": {
+        "note": "Notiz!",
+        "commonFieldInfo": "Die folgenden Änderungen gelten für alle Sprachen",
+        "categoryHelpText": "Sie haben keine Benachrichtigung zum Anzeigen.",
+        "noRecordTitle": "Keine Benachrichtigung!",
+        "noRecordSubline": "Es wurde keine Benachrichtigung im Datensatz gefunden"
+      },
+      "header": {
+        "new": "Benachrichtigung erstellen",
+        "update": "Update-Benachrichtigung"
+      },
+      "list": {
+        "title": "Benachrichtigung"
+      },
+      "column": {
+        "title": "Titel",
+        "active": "Aktiv"
+      },
+      "button": {
+        "save": "Speichern",
+        "create": "Schaffen"
+      },
+      "generalTitle": "Benachrichtigung Allgemein",
+      "field": {
+        "activeNotification": "Aktive Benachrichtigungsleiste",
+        "title": "Titel",
+        "displayTitle": "Titel anzeigen",
+        "content": "Inhalt",
+        "displayAs": "Darstellen als",
+        "animationType": "Animationstyp",
+        "border": "Saum",
+        "barPosition": "Balkenposition",
+        "barWidth": "Balkenbreite",
+        "cookieLifeTime": "Cookie-Lebensdauer in Minuten",
+        "titleColor": "Titelfarbe",
+        "iconColor": "Symbolfarbe schließen",
+        "overlayColor": "Popup-Overlay-Farbe",
+        "backgroundColor": "Hintergrundfarbe",
+        "borderColor": "Randfarbe",
+        "activeForCategory": "Separate Benachrichtigung aktivieren"
+      },
+      "placeholder": {
+        "title": "Titel",
+        "cookieLifeTime": "Zeit in Minute"
+      }
+    }
+  }
+}

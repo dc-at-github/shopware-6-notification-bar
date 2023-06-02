@@ -1,0 +1,29 @@
+{% block stagebit_notification_popup %}
+    {% if (config('DcGlobalNotification.config.active')) %}
+        <div class="notification-popup-overlay d-none"
+             data-notification-bar="true"
+             data-stagebit-notification-bar-options='{
+                "cookieExpiration": {{ Stag2Notification.cookieLifeTime }},
+                "cookieName": "{{ page.extensions.stag2NotificationCookie }}",
+                "notificationType": "{{ Stag2Notification.displayAs }}",
+                "animationType": "{{ Stag2Notification.animationType }}"
+             }'
+             style="background-color: {{ Stag2Notification.overlayColor }};">
+            <div class="notification-popup-container stag2-{{ Stag2Notification.animationType }}">
+                <div class="notification-popup-content"
+                     style="background-color: {{ Stag2Notification.backgroundColor }};
+                             border-color: {{ Stag2Notification.borderColor }};
+                             border: {{ Stag2Notification.borderType }};">
+                    {% block stagebit_notification_bar_close %}
+                        <span class="close-notification" style="color: {{ Stag2Notification.iconColor }};">&times;</span>
+                    {% endblock %}
+
+                    {% if Stag2Notification.displayTitle %}
+                        <h3 class="notification-title " style="color: {{ Stag2Notification.titleColor }}">{{ Stag2Notification.title }}</h3>
+                    {% endif %}
+                    <p class="notification-content">{{ Stag2Notification.content|raw }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

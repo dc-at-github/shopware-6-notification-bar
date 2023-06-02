@@ -1,0 +1,24 @@
+{% block stagebit_notification_bar %}
+    {% if (config('DcGlobalNotification.config.active')) %}
+        <div class="row d-none m-0 notification-bar"
+             data-notification-bar="true"
+             data-stagebit-notification-bar-options='{
+                "cookieExpiration": {{ Stag2Notification.cookieLifeTime }},
+                "cookieName": "{{ page.extensions.stag2NotificationCookie }}",
+                "notificationType": "{{ Stag2Notification.displayAs }}",
+                "animationType": false
+             }'
+             style="background-color: {{ Stag2Notification.backgroundColor }}; border-color: {{ Stag2Notification.borderColor }};">
+            <div class="{% if(Stag2Notification.width == "full-width") %}container-fluid{% else %}container{% endif %}">
+                {% block stagebit_notification_bar_close %}
+                    <span class="close-notification" style="color: {{ Stag2Notification.iconColor }};">&times;</span>
+                {% endblock %}
+
+                {% if Stag2Notification.displayTitle %}
+                    <h3 class="notification-title " style="color: {{ Stag2Notification.titleColor }}">{{ Stag2Notification.title }}</h3>
+                {% endif %}
+                <p class="notification-content">{{ Stag2Notification.content|raw }}</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

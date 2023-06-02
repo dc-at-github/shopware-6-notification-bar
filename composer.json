@@ -1,0 +1,40 @@
+{
+  "name": "dc/global-notification",
+  "description": "Add Notification Bar/Popup to storefront. Each category pages can have it's own separate notification.",
+  "version": "1.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "require": {
+    "shopware/core": ">=6.3"
+  },
+  "authors": [
+    {
+      "name": "Darpan Chaudhari"
+    }
+  ],
+  "extra": {
+    "shopware-plugin-class": "Dc\\GlobalNotification\\DcGlobalNotification",
+    "copyright": "(c) by DC",
+    "label": {
+      "en-GB": "Global Notification Bar",
+      "de-DE": "Global Notificatie balk"
+    },
+    "description": {
+      "de-DE": "shopmanager kan een bericht maken om het in koptekst/voettekst voor de frontend-gebruiker weer te geven.",
+      "en-GB": "shop manager can create a message to display it in header/footer for the frontend user."
+    },
+    "manufacturerLink": {
+      "de-DE": "https://about-dc-career.com",
+      "en-GB": "https://about-dc-career.com"
+    },
+    "supportLink": {
+      "de-DE": "https://about-dc-career.com",
+      "en-GB": "https://about-dc-career.com"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Dc\\GlobalNotification\\": "src/"
+    }
+  }
+}

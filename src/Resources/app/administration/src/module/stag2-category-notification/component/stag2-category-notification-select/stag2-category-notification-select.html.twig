@@ -1,0 +1,32 @@
+{% block stag2_category_notification_select %}
+    <sw-card title="Notification">
+
+        {% block stag2_page_notification_active_field %}
+            <sw-container columns="repeat(auto-fit, minmax(150px, 220px))" gap="0px 30px" align="center">
+                <sw-switch-field v-model="stag2Active"
+                                 :label="$tc('stag2.notification.field.activeForCategory')"
+                                 :disabled="isDisabled">
+                </sw-switch-field>
+                <sw-help-text :text="$tc('stag2.notification.general.categoryHelpText')"
+                              :width="300"
+                              tooltipPosition="top"
+                              :showDelay="100"
+                              :hideDelay="100" v-if="isDisabled">
+                    you don't have any notification to show.
+                </sw-help-text>
+            </sw-container>
+        {% endblock %}
+
+        {% block stag2_notification_active_field %}
+            <template v-if="stag2Active">
+                <sw-entity-single-select label=""
+                                         entity="stag2_notification"
+                                         labelProperty="title"
+                                         valueProperty="id"
+                                         v-model="stag2NotificationId">
+                </sw-entity-single-select>
+            </template>
+        {% endblock %}
+
+    </sw-card>
+{% endblock %}
