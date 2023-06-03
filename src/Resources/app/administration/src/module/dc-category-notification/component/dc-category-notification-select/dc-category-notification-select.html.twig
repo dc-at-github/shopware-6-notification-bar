@@ -1,0 +1,32 @@
+{% block dc_category_notification_select %}
+    <sw-card title="Notification">
+
+        {% block dc_page_notification_active_field %}
+            <sw-container columns="repeat(auto-fit, minmax(150px, 220px))" gap="0px 30px" align="center">
+                <sw-switch-field v-model="dcActive"
+                                 :label="$tc('dc.notification.field.activeForCategory')"
+                                 :disabled="isDisabled">
+                </sw-switch-field>
+                <sw-help-text :text="$tc('dc.notification.general.categoryHelpText')"
+                              :width="300"
+                              tooltipPosition="top"
+                              :showDelay="100"
+                              :hideDelay="100" v-if="isDisabled">
+                    you don't have any notification to show.
+                </sw-help-text>
+            </sw-container>
+        {% endblock %}
+
+        {% block dc_notification_active_field %}
+            <template v-if="dcActive">
+                <sw-entity-single-select label=""
+                                         entity="dc_notification"
+                                         labelProperty="title"
+                                         valueProperty="id"
+                                         v-model="dcNotificationId">
+                </sw-entity-single-select>
+            </template>
+        {% endblock %}
+
+    </sw-card>
+{% endblock %}

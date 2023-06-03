@@ -1,8 +1,8 @@
 {% sw_extends '@Strofront/storefront/base.html.twig' %}
-{% set Stag2Notification = page.extensions.notification %}
+{% set DcNotification = page.extensions.notification %}
 
 {% block base_header %}
-    {% if(Stag2Notification.displayAs == "bar" and Stag2Notification.position == "top") %}
+    {% if(DcNotification.displayAs == "bar" and DcNotification.position == "top") %}
         {% sw_include '@Storefront/storefront/layout/notification-bar.html.twig' %}
     {% endif %}
 
@@ -10,13 +10,13 @@
 {% endblock %}
 
 {% block base_main %}
-    {% if(Stag2Notification.displayAs == "bar" and Stag2Notification.position == "below-header") %}
+    {% if(DcNotification.displayAs == "bar" and DcNotification.position == "below-header") %}
         {% sw_include '@Storefront/storefront/layout/notification-bar.html.twig' %}
     {% endif %}
 
     {{ parent() }}
 
-    {% if(Stag2Notification.displayAs == "bar" and Stag2Notification.position == "above-footer") %}
+    {% if(DcNotification.displayAs == "bar" and DcNotification.position == "above-footer") %}
         {% sw_include '@Storefront/storefront/layout/notification-bar.html.twig' %}
     {% endif %}
 {% endblock %}
@@ -24,7 +24,7 @@
 {% block base_footer %}
     {{ parent() }}
 
-    {% if(Stag2Notification.displayAs == "bar" and Stag2Notification.position == "bottom") %}
+    {% if(DcNotification.displayAs == "bar" and DcNotification.position == "bottom") %}
         {% sw_include '@Storefront/storefront/layout/notification-bar.html.twig' %}
     {% endif %}
 {% endblock %}
@@ -33,7 +33,7 @@
 {% block base_body_inner %}
     {{ parent() }}
 
-    {% if(Stag2Notification.displayAs == "popup") %}
+    {% if(DcNotification.displayAs == "popup") %}
         {% sw_include '@Storefront/storefront/layout/notification-popup.html.twig' %}
     {% endif %}
 

@@ -16,7 +16,7 @@ class PageLoaderSubscriber implements EventSubscriberInterface
     /**
      * @var EntityRepositoryInterface
      */
-    private $stag2Notification;
+    private $dcNotification;
 
     /**
      * @var SystemConfigService
@@ -24,14 +24,14 @@ class PageLoaderSubscriber implements EventSubscriberInterface
     private $systemConfigService;
 
     /**
-     * @param EntityRepositoryInterface $stag2Notification
+     * @param EntityRepositoryInterface $dcNotification
      * @param SystemConfigService $systemConfigService
      */
     public function __construct(
-        EntityRepositoryInterface $stag2Notification,
+        EntityRepositoryInterface $dcNotification,
         SystemConfigService $systemConfigService
     ){
-        $this->stag2Notification = $stag2Notification;
+        $this->dcNotification = $dcNotification;
         $this->systemConfigService = $systemConfigService;
     }
 
@@ -69,7 +69,7 @@ class PageLoaderSubscriber implements EventSubscriberInterface
             $NotificationActive = $this->systemConfigService->get("DcGlobalNotification.config.active");
             $notificationId = false;
             $pageHeader = $event->getPage()->getHeader();
-            $cookieName = "stag2-notification-default";
+            $cookieName = "dc-notification-default";
 
             if ($pageHeader && $pageHeader->getNavigation()) {
                 $activeCategory = $pageHeader->getNavigation()->getActive();
@@ -83,7 +83,7 @@ class PageLoaderSubscriber implements EventSubscriberInterface
                 if ($NotificationActive) {
                     if ($activeCategory && $pageNotification && $pageNotification->getActive()) {
                         $notificationId = $pageNotification->getNotificationId();
-                        $cookieName = "stag2-notification-" . $notificationId;
+                        $cookieName = "dc-notification-" . $notificationId;
                     }
                 }
             }
@@ -96,7 +96,7 @@ class PageLoaderSubscriber implements EventSubscriberInterface
 
             $event->getPage()->setExtensions([
                 "notification" => $notification,
-                "stag2NotificationCookie" => $cookieName
+                "dcNotificationCookie" => $cookieName
             ]);
         }
     }
@@ -112,7 +112,7 @@ class PageLoaderSubscriber implements EventSubscriberInterface
             return false;
         }
 
-        $navigation = $this->stag2Notification->search(
+        $navigation = $this->dcNotification->search(
             new Criteria([$notificationId]),
             $context
         );

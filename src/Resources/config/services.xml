@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="Dc\GlobalNotification\Core\Content\NotificationDefinition">
-            <tag name="shopware.entity.definition" entity="stag2_notification"/>
+            <tag name="shopware.entity.definition" entity="dc_notification"/>
         </service>
 
         <service id="Dc\GlobalNotification\Core\Content\Translation\NotificationTranslationDefinition">
@@ -21,7 +21,7 @@
         </service>
 
         <service id="Dc\GlobalNotification\Subscriber\PageLoaderSubscriber">
-            <argument type="service" id="stag2_notification.repository" />
+            <argument type="service" id="dc_notification.repository" />
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
             <tag name="kernel.event_subscriber" />
         </service>

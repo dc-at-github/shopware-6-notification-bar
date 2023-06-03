@@ -1,1 +1,0 @@
-import "./stag2-plugin-icon";

@@ -1,5 +1,5 @@
-import StagebitNotificationBar from "./plugins/stagebit-notification-bar.plugin";
+import DcNotificationBar from "./plugins/dc-notification-bar.plugin";
 
 PluginManager = window.PluginManager;
 
-PluginManager.register('StagebitNotificationBar', StagebitNotificationBar, "[data-notification-bar]")
+PluginManager.register('DcNotificationBar', DcNotificationBar, "[data-notification-bar]")

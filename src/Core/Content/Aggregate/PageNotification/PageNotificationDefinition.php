@@ -37,12 +37,12 @@ class PageNotificationDefinition extends EntityDefinition{
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
-            (new FkField('stag2_notification_id', 'notificationId', NotificationDefinition::class, 'id')),
+            (new FkField('dc_notification_id', 'notificationId', NotificationDefinition::class, 'id')),
             (new ReferenceVersionField(NotificationDefinition::class)),
             (new FkField('category_id', 'categoryId', CategoryDefinition::class, 'id'))->addFlags(new Required(), new PrimaryKey()),
             (new ReferenceVersionField(CategoryDefinition::class))->addFlags(new Required(), new PrimaryKey()),
             (new BoolField('active', 'active'))->addFlags(new Required()),
-            (new ManyToOneAssociationField('notification', 'stag2_notification_id', NotificationDefinition::class, 'id', false)),
+            (new ManyToOneAssociationField('notification', 'dc_notification_id', NotificationDefinition::class, 'id', false)),
             (new OneToOneAssociationField('category', 'category_id', "id", CategoryDefinition::class, false))
         ]);
     }

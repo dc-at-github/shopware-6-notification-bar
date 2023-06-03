@@ -34,23 +34,23 @@
     animation-name: show-notification-close;
   }
 
-  &.stag2-slide-up{
+  &.dc-slide-up{
     top: 100%;
     animation-name: slide-from-bottom;
   }
-  &.stag2-slide-down{
+  &.dc-slide-down{
     top: -100%;
     animation-name: slide-from-up;
   }
-  &.stag2-slide-left{
+  &.dc-slide-left{
      left: 100%;
      animation-name: slide-from-right;
   }
-  &.stag2-slide-right{
+  &.dc-slide-right{
     left: -100%;
     animation-name: slide-from-left;
   }
-  &.stag2-fade-in{
+  &.dc-fade-in{
     opacity: 0;
     animation-name: animate-fade-in;
   }

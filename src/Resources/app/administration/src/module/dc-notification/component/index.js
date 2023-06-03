@@ -1,0 +1,1 @@
+import "./dc-plugin-icon";

@@ -1,0 +1,191 @@
+{% block dc_notification_detail_page %}
+    <sw-page class="dc-notification-detail-page">
+        {% block dc_notification_detail_header %}
+            <template slot="smart-bar-header">
+                <h2 v-if="dcNotification && dcNotification.isNew()">{{ $tc('dc.notification.header.new') }}</h2>
+                <h2 v-if="dcNotification && !dcNotification.isNew()">
+                    {{ $t('dc.notification.header.update') }}
+                    - "{{ dcNotification.translated.title }}"
+                </h2>
+            </template>
+        {% endblock %}
+
+        {% block dc_notification_detail_actions %}
+            <template slot="smart-bar-actions">
+                {% block dc_notification_detail_action_btn %}
+                    <sw-button-process
+                            variant="primary"
+                            :isLoading="isLoading"
+                            :processSuccess="processSuccess"
+                            :disabled="isLoading"
+                            @click.prevent="onSave">
+                        {{ $t('dc.notification.button.save') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block dc_notification_language_chooser %}
+            <template #language-switch>
+                <sw-language-switch
+                        slot="language-switch"
+                        :disabled="dcNotification && dcNotification.isNew()"
+                        @on-change="onChangeLanguage">
+                </sw-language-switch>
+            </template>
+        {% endblock %}
+
+        {% block dc_notification_detail_content %}
+            <sw-card-view
+                    slot="content"
+                    :isLoading="isLoading"
+                    v-if="dcNotification">
+                <sw-card :title="$tc('dc.notification.generalTitle')">
+
+                    {% block dc_notification_active_field %}
+                        <sw-switch-field v-model="dcNotification.active"
+                                         :label="$tc('dc.notification.field.activeNotification')">
+                        </sw-switch-field>
+                    {% endblock %}
+
+                    {% block dc_notification_title_field %}
+                        <sw-field
+                                v-model="dcNotification.title"
+                                :label="$tc('dc.notification.field.title')"
+                                :placeholder="$tc('dc.notification.placeholder.title')"
+                                validation="required">
+                        </sw-field>
+                    {% endblock %}
+
+                    {% block dc_notification_display_title_field %}
+                        <sw-switch-field v-model="dcNotification.displayTitle"
+                                         :label="$tc('dc.notification.field.displayTitle')">
+                        </sw-switch-field>
+                    {% endblock %}
+
+                    {% block dc_notification_content_field %}
+                        <sw-text-editor v-model="dcNotification.content"
+                                        :label="$tc('dc.notification.field.content')">
+                        </sw-text-editor>
+                    {% endblock %}
+
+                </sw-card>
+
+                <sw-card title="Notification Bar Configuration">
+
+                    <label class="help-description">
+                        <b>{{ $tc('dc.notification.general.note') }}</b>
+                        {{ $tc('dc.notification.general.commonFieldInfo') }}
+                    </label>
+
+                    {% block dc_notification_display_as_field %}
+                        <template>
+                            <sw-single-select
+                                    v-model="dcNotification.displayAs"
+                                    :options="getDisplayAsOptions"
+                                    :label="$tc('dc.notification.field.displayAs')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block dc_notification_animation_type_field %}
+                        <template v-if="isPopup">
+                            <sw-single-select
+                                    v-model="dcNotification.animationType"
+                                    :options="getAnimationOptions"
+                                    :label="$tc('dc.notification.field.animationType')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block dc_notification_border_type_field %}
+                        <template>
+                            <sw-single-select
+                                    v-model="dcNotification.borderType"
+                                    :options="getBorderTypeOptions"
+                                    :label="$tc('dc.notification.field.border')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block dc_notification_position_field %}
+                        <template v-if="!isPopup">
+                            <sw-single-select
+                                    v-model="dcNotification.position"
+                                    :options="getPositionOptions"
+                                    :label="$tc('dc.notification.field.barPosition')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block dc_notification_bar_width_field %}
+                        <template v-if="!isPopup">
+                            <sw-single-select
+                                    v-model="dcNotification.width"
+                                    :options="getBarWidthOptions"
+                                    :label="$tc('dc.notification.field.barWidth')">
+                            </sw-single-select>
+                        </template>
+                    {% endblock %}
+
+                    {% block dc_notification_cookie_field %}
+                        <sw-number-field
+                                v-model="dcNotification.cookieLifeTime"
+                                :label="$tc('dc.notification.field.cookieLifeTime')"
+                                :placeholder="$tc('dc.notification.placeholder.cookieLifeTime')"
+                                validation="required">
+                        </sw-number-field>
+                    {% endblock %}
+
+                </sw-card>
+
+                <sw-card title="Colors">
+
+
+                    <label class="help-description">
+                        <b>{{ $tc('dc.notification.general.note') }}</b>
+                        {{ $tc('dc.notification.general.commonFieldInfo') }}
+                    </label>
+
+                    {% block dc_notification_title_color_field %}
+                        <sw-colorpicker
+                                v-model="dcNotification.titleColor"
+                                :label="$tc('dc.notification.field.titleColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                    {% block dc_notification_icon_color_field %}
+                        <sw-colorpicker
+                                v-model="dcNotification.iconColor"
+                                :label="$tc('dc.notification.field.iconColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                    {% block dc_notification_overlay_color_field %}
+                        <template v-if="isPopup">
+                            <sw-colorpicker
+                                    v-model="dcNotification.overlayColor"
+                                    :label="$tc('dc.notification.field.overlayColor')">
+                            </sw-colorpicker>
+                        </template>
+                    {% endblock %}
+
+                    {% block dc_notification_background_color_field %}
+                        <sw-colorpicker
+                                v-model="dcNotification.backgroundColor"
+                                :label="$tc('dc.notification.field.backgroundColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                    {% block dc_notification_border_color_field %}
+                        <sw-colorpicker
+                                v-model="dcNotification.borderColor"
+                                :label="$tc('dc.notification.field.borderColor')">
+                        </sw-colorpicker>
+                    {% endblock %}
+
+                </sw-card>
+            </sw-card-view>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

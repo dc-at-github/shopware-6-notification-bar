@@ -1,0 +1,62 @@
+{% block dc_notification_config_container %}
+    <sw-page class="sw-dc-notification">
+        {% block sw_dc_notification_header %}
+            <template slot="smart-bar-header">
+                <h2>{{ $tc('dc.notification.list.title') }}</h2>
+            </template>
+        {% endblock %}
+
+        {% block sw_dc_actions_container %}
+            <template slot="smart-bar-actions">
+                {% block sw_dc_action_create %}
+                    <sw-button
+                            :routerLink="{name:'dc.notification.create'}"
+                            class="sw_dc_notification__action_create"
+                            :isLoading="isLoading"
+                            variant="primary">
+                        {{ $tc('dc.notification.button.create') }}
+                    </sw-button>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+
+        {% block sw_dc_language_switch %}
+            <template slot="language-switch">
+                <sw-language-switch @on-change="onChangeLanguage"></sw-language-switch>
+            </template>
+        {% endblock %}
+
+        <template slot="content">
+                {% block dc_notification_list %}
+                    <sw-entity-listing
+                            v-if="dcNotifications && total > 0"
+                            :items="dcNotifications"
+                            detailRoute="dc.notification.detail"
+                            :repository="notificationRepository"
+                            :showSelection="true"
+                            :columns="columns"
+                            :isLoading="isLoading">
+
+                        {% block dc_notification_column_active %}
+                            <template #column-active="{item}">
+                                <sw-icon name="default-basic-shape-circle-filled" v-if="item.active" size="12px" color="#1abc9c" />
+                                <sw-icon name="default-basic-shape-circle-filled" v-if="!item.active" size="12px" color="#fc427b" />
+                            </template>
+                        {% endblock %}
+
+                    </sw-entity-listing>
+                {% endblock %}
+
+                {% block dc_notification_no_record %}
+                    <template v-if="!isLoading && !total">
+                        <sw-empty-state
+                                :title="$tc('dc.notification.general.noRecordTitle')"
+                                :subline="$tc('dc.notification.general.noRecordSubline')">
+                        </sw-empty-state>
+                    </template>
+                {% endblock %}
+        </template>
+
+    </sw-page>
+{% endblock %}

@@ -22,7 +22,7 @@ use Dc\GlobalNotification\Core\Content\Translation\NotificationTranslationDefini
 class NotificationDefinition extends EntityDefinition
 {
 
-    public const ENTITY_NAME = "stag2_notification";
+    public const ENTITY_NAME = "dc_notification";
 
     public function getEntityName(): string
     {
@@ -62,8 +62,8 @@ class NotificationDefinition extends EntityDefinition
             (new TranslatedField('title', 'title'))->addFlags(new Required()),
             (new TranslatedField('content', 'content'))->addFlags(new Required()),
 
-            (new TranslationsAssociationField(NotificationTranslationDefinition::class, "stag2_notification_id")),
-            (new OneToManyAssociationField("pageNotification", PageNotificationDefinition::class, "stag2_notification_id", "id"))
+            (new TranslationsAssociationField(NotificationTranslationDefinition::class, "dc_notification_id")),
+            (new OneToManyAssociationField("pageNotification", PageNotificationDefinition::class, "dc_notification_id", "id"))
         ]);
     }
 }

@@ -15,7 +15,7 @@
 
         <component name="sw-entity-single-select">
             <name>notification</name>
-            <entity>stag2_notification</entity>
+            <entity>dc_notification</entity>
             <labelProperty>title</labelProperty>
             <label>Choose Default Notification to show</label>
         </component>
