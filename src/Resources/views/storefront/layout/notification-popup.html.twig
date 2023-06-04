@@ -12,8 +12,8 @@
             <div class="notification-popup-container dc-{{ DcNotification.animationType }}">
                 <div class="notification-popup-content"
                      style="background-color: {{ DcNotification.backgroundColor }};
-                             border-color: {{ DcNotification.borderColor }};
-                             border: {{ DcNotification.borderType }};">
+                             border: {{ DcNotification.borderType }};
+                             border-color: {{ DcNotification.borderColor }};">
                     {% block dc_notification_bar_close %}
                         <span class="close-notification" style="color: {{ DcNotification.iconColor }};">&times;</span>
                     {% endblock %}
